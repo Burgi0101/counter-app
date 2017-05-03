@@ -2,22 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 
-import todos from '../src/app/components/todos';
+import { rootReducer } from './app/rootReducer';
+import todos from '../src/app/components/todos/index';
 
-const { TodosActions, TodosComponent, TodosReducer } = todos;
+const { TodosActions, TodosComponent } = todos;
+const store = createStore(rootReducer);
 
-const store = createStore(TodosReducer);
-
-const Todos = TodosComponent(React);
+const onAdd = () => store.dispatch(TodosActions.addTodo('test'));
 
 const render = () => {
+
+    const Todos = TodosComponent(React);
+
     ReactDOM.render(
-        <Todos todos={store.getState()} onAdd={() => store.dispatch(TodosActions.addTodo('test'))} />,
+        <div>
+            <Todos todos={store.getState()} onAdd={onAdd} />
+        </div>,
         document.getElementById('root')
     );
 };
+
 store.subscribe(render);
 render();
-
-
-
