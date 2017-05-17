@@ -1,4 +1,4 @@
-import * as TodosActions from './actions';
+import { addTodo } from './actions';
 
 export const TodosComponent = React => {
 
@@ -16,7 +16,7 @@ export const TodosComponent = React => {
                         if (!input.value.trim()) {
                             return;
                         }
-                        store.dispatch(TodosActions.addTodo(input.value));
+                        store.dispatch(addTodo(input.value));
                     }
                 }>Add Todo</button>
                 <ul>
